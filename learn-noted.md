@@ -46,6 +46,11 @@ https://html.spec.whatwg.org/multipage/
 * 在状态机中，除了状态迁移，还要加入业务逻辑
 * 在标签结束状态提交标签 token
 
+### 第五步
+* 属性值分为单引号、双引号、无引号三种写法，因此需要较多状态处理
+* 处理属性的方式跟标签类似
+* 属性结束时，把属性加到标签 Token 上
+
 ######Tips:
 查看端口占用: sudo lsof -i tcp:8088
 杀进程: sudo kill -9 PID
