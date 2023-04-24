@@ -16,4 +16,15 @@
 
 ### 第四步
 * Response 必须分段构造，所以我们要用一个 ResponseParser 来“装配”
-* ResponseParser 分段处理 ResponseText，我们用状态机来分析文本的结构  
+* ResponseParser 分段处理 ResponseText，我们用状态机来分析文本的结构
+
+### 第五步
+<!-- TODO: Transfer-Encoding，有不同的值，有时间探究一下 -->
+Response 的 body 可能根据 Transfer-Encoding 有不同的结构，因此我们会采用子 Parser 的结构来解决问题
+以 TrunkedBodyParser 为例，我们同样用状态机来处理 body 的格式
+
+
+
+##### Tips:
+查看端口占用: sudo lsof -i tcp:8088
+杀进程: sudo kill -9 PID

@@ -10,13 +10,14 @@ http
       .on("data", (chunk) => {
         body.push(chunk.toString());
       })
-      .on("end", () => { 
+      .on("end", () => {
         // https://nodejs.cn/api/buffer.html#static-method-bufferfromstring-encoding
         // https://nodejs.cn/api/buffer.html#static-method-bufferconcatlist-totallength
-        body = (Buffer.concat([Buffer.from(body.toString())])).toString();
+        // body = (Buffer.concat([Buffer.from(body.toString())])).toString();
+        body = body.join("");
         console.log("body:", body);
         response.writeHead(200, { "Content-Type": "text/html" });
-        response.end(" Hello world");
+        response.end(" Hello world\n");
       });
   })
   .listen(8088);
