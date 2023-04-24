@@ -38,9 +38,13 @@ https://html.spec.whatwg.org/multipage/
 * 在 HTML 标准中，已经规定了 HTML 的状态
 * Toy-Browser只挑选其中一部分状态，完成一个最简版本
 
-### 第三步 
+### 第三步 parse tag
 * 主要的标签有：开始标签、结束标签和自封闭标签
 * 在这一步我们暂时忽略属性
+
+### 第四步 emit token
+* 在状态机中，除了状态迁移，还要加入业务逻辑
+* 在标签结束状态提交标签 token
 
 ######Tips:
 查看端口占用: sudo lsof -i tcp:8088

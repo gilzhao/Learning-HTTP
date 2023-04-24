@@ -1,12 +1,24 @@
-const EOF = Symbol("EOF"); // 利用 Symbol 的唯一性; EOF: End of File
 let currentToken = null;
+
+function emit(token) {
+  console.log(token);
+}
+
+const EOF = Symbol("EOF"); // 利用 Symbol 的唯一性; EOF: End of File
 
 function data(c) {
   if (c === "<") {
     return tagOpen;
   } else if (c === EOF) {
+    emit({
+      type: "EOF",
+    });
     return;
   } else {
+    emit({
+      type: "text",
+      content: c,
+    });
     return data;
   }
 }
@@ -15,6 +27,10 @@ function tagOpen(c) {
   if (c === "/") {
     return endTagOpen;
   } else if (c.match(/^[a-zA-Z]$/)) {
+    currentToken = {
+      type: "startTag",
+      tagName: "",
+    };
     return tagName(c);
   } else {
     return;
@@ -23,6 +39,10 @@ function tagOpen(c) {
 
 function endTagOpen(c) {
   if (c.match(/^[a-zA-Z]$/)) {
+    currentToken = {
+      type: "endTag",
+      tagName: "",
+    };
     return tagName(c);
   } else if (c === ">") {
     // 报错
@@ -39,8 +59,10 @@ function tagName(c) {
   } else if (c === "/") {
     return selfClosingStartTag;
   } else if (c.match(/^[a-zA-Z]$/)) {
+    currentToken.tagName += c
     return tagName;
   } else if (c === ">") {
+    emit(currentToken)
     return data;
   } else {
     return tagName;
@@ -60,12 +82,12 @@ function beforeAttributeName(c) {
 }
 
 function selfClosingStartTag(c) {
-  if (c === '>') {
-    currentToken.isSelfClosing = true
-    return data
+  if (c === ">") {
+    currentToken.isSelfClosing = true;
+    return data;
   } else if (c === EOF) {
-
-  } else {}
+  } else {
+  }
 }
 
 module.exports.parseHTML = function parseHTML(html) {
