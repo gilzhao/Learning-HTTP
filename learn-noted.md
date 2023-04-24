@@ -33,6 +33,11 @@ Response 的 body 可能根据 Transfer-Encoding 有不同的结构，因此我�
 https://html.spec.whatwg.org/multipage/
 [13.2.5 Tokenization](https://html.spec.whatwg.org/multipage/parsing.html#tokenization)
 
+### 第二步
+* 用 FEM 来实现 HTML的分析
+* 在 HTML 标准中，已经规定了 HTML 的状态
+* Toy-Browser只挑选其中一部分状态，完成一个最简版本
+
 ######Tips:
 查看端口占用: sudo lsof -i tcp:8088
 杀进程: sudo kill -9 PID
