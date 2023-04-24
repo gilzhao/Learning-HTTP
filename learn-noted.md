@@ -46,10 +46,22 @@ https://html.spec.whatwg.org/multipage/
 * 在状态机中，除了状态迁移，还要加入业务逻辑
 * 在标签结束状态提交标签 token
 
-### 第五步
+### 第五步 attribute
 * 属性值分为单引号、双引号、无引号三种写法，因此需要较多状态处理
 * 处理属性的方式跟标签类似
 * 属性结束时，把属性加到标签 Token 上
+
+[13.2.6 Tree construction](https://html.spec.whatwg.org/multipage/parsing.html#tree-construction)
+
+### 第六步 construct tree
+* 从标签构建 DOM 树的基本技巧是使用栈
+* 遇到开始标签时创建元素并入栈，遇到结束标签时出战
+* 自封闭节点可视为入栈后立刻出栈
+* 任何元素的父元素是他入栈前的栈顶
+
+### 第七步 combine text
+* 文本节点与自封闭标签处理类似
+* 多个文本节点需要合并
 
 ######Tips:
 查看端口占用: sudo lsof -i tcp:8088
