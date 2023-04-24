@@ -1,5 +1,6 @@
 const net = require("net");
 const { resolve } = require("path");
+const parser = require('./parser');
 
 class Request {
   constructor(options) {
@@ -217,7 +218,7 @@ void (async function () {
   });
 
   let response = await request.send();
+  
+  let dom = parser.parseHTML(response.body) // 实际上这里要异步分段处理
 
-
-  console.log(response);
 })();
